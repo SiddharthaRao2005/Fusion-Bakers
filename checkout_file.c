@@ -1,34 +1,11 @@
 #include <stdio.h>
 
-int chechout(){
-    char items[10][10];
-    int itemprice[10][10];
-    int itemquant[10][10];
-    int serialno=1;
-    int* q = itemquant;
-    int* p = itemprice;
+enum item_prices {Eggs=70,Bread=50,Milk=25,Honey=100,Butter=50,Jam=50,Flour=60,Sugar=60,Yeast=50,Berries=200}
+const char items[10] = {"Eggs","Bread","Milk","Honey","Butter","Jam","Flour","Sugar","Yeast","Berries"};
 
+void checkout(){
     for (int i = 0; i<10; i++){
-        printf("Enter item name: ");
-        scanf("%s",items[i]);
-        printf("Enter item quantity: ");
-        scanf("%d",*q);
-        q++;
-        printf("Enter item price: ");
-        scanf("%d",*p);
-        p++;
-    }
-    printf("                  Here is the list of items added:                  \n");
-    printf("--------------------------------------------------------------------\n");
-    printf("        | Item No.|       Name       | Quantity | Price |          \n");
-    for (int j = 0; j<10; j++){
+        printf("Enter item number: ");
         
-        printf("        |    %d    |       %s       |    %d    |  %.3f   |         \n",serialno+j,items[j],q,(*q)*(*p));
-        q++;
-        p++;
-    }
-}
-
-void main(){
-    chechout();  //Only run for debugging and test purposes !!!
+    }   
 }
