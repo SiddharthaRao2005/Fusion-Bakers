@@ -2,7 +2,6 @@
 
 enum item_prices {Eggs=70,Bread=50,Milk=25,Honey=100,Butter=50,Jam=50,Flour=60,Sugar=60,Yeast=50,Berries=200}
 // const char items[10] = {"Eggs","Bread","Milk","Honey","Butter","Jam","Flour","Sugar","Yeast","Berries"};
-int item_holder[10];
 int quantity[10];
 
 void checkout(){
@@ -17,7 +16,7 @@ void checkout(){
     printf("-------------------------------------------------------\n");
     printf(" | Item ID |    Items    | Quantity | Price | Total |  \n");
     for (int j = 0; j<10; j++){
-        printf(" |   %d    |     %s     |    %d    |  %d  |  %d  | \n",j+1,items[j],quantity[j],item_holder[item_prices])
+        printf(" |   %d    |     %s     |    %d    |  %d  |  %d  | \n",j+1,items[j],quantity[j],items[j]*quantity[j]);
     }
        
 }
