@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "checkout.h"
+#include "stocks.h"
 
 int main()
 {
@@ -18,8 +19,8 @@ int main()
         // printf("Checkout\n");
         break;
     case 2:
-        // stock();
-        printf("Stocks\n");
+        stocksmgmt();
+        // printf("Stocks\n");
         break;
     case 3:
         exit(0);
