@@ -2,77 +2,84 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Implementing concept of linked list for making bills, and storing them in a text file along
-    generating another one in terminal for use case.*/
-
-struct bill{
+struct bill {
     char itemname[20];
     unsigned int itemquantity;
     unsigned int itemprice;
     struct bill* node;
 };
 
-void WriteToFile(struct bill* head, const char* custname){
-    FILE* fp = fopen(custname,"w");
+void WriteToFile(struct bill* head, const char* custname) {
+    FILE* fp = fopen(custname, "w");
     struct bill* temp = head;
-    while (temp != NULL){
-        fprintf(fp, "%s %u %u",temp->itemname,temp->itemquantity,(temp->itemprice*temp->itemquantity));
+    while (temp != NULL) {
+        fprintf(fp, "%s %u %u\n", temp->itemname, temp->itemquantity, (temp->itemprice * temp->itemquantity));
+        temp = temp->node;
     }
     fclose(fp);
 }
 
-void checkout()
-{
+void checkout() {
     printf("------------Generating customer bill--------------\n");
     struct bill* head = NULL;
     struct bill* tail = NULL;
     struct bill* temp;
     int ch = 0;
     char custname[50];
-    while (ch != 1)
-    {
-        struct bill* new = (struct bill*)malloc(sizeof(struct bill));
+    do {
+        struct bill* new_item = (struct bill*)malloc(sizeof(struct bill));
         printf("Enter item name: ");
-        scanf("%[^\n]%*c",new->itemname);
+        scanf("%s", new_item->itemname);
         printf("Enter item quantity and price: ");
-        scanf("%u %u", new->itemquantity, new->itemprice);
-        new->node = NULL;
-        if (head == NULL){
-            head = new;
-            tail = new;
+        scanf("%u %u", &new_item->itemquantity, &new_item->itemprice);
+        new_item->node = NULL;
+        if (head == NULL) {
+            head = new_item;
+            tail = new_item;
         }
-        else{
-            tail->node = new;
-            tail = new;
+        else {
+            tail->node = new_item;
+            tail = new_item;
         }
-        printf("Do you want to add another item ? (0->yes/1->no): ");
-        scanf("%d",&ch);
-    }
+        printf("Do you want to add another item? (0->yes/1->no): ");
+        scanf("%d", &ch);
+    } while (ch != 1);
+
     printf("----------Customer Bill Generated Below------------\n");
     temp = head;
     printf("Item name | Item Quantity | Item Original Price | Item Cost\n");
-    while (temp != NULL){
-        printf("%s | %u | %u | %u \n",temp->itemname,temp->itemquantity,temp->itemprice,(temp->itemprice*temp->itemquantity));
+    while (temp != NULL) {
+        printf("%s | %u | %u | %u \n", temp->itemname, temp->itemquantity, temp->itemprice, (temp->itemprice * temp->itemquantity));
         temp = temp->node;
     }
     printf("-----End-----\n");
+
     int ch2;
-    printf("Do you wish to go with the given bill ? (0->yes/1->no) : ");
-    if (ch2 == 0){
+    printf("Do you wish to go with the given bill? (0->yes/1->no): ");
+    scanf("%d", &ch2);
+
+    if (ch2 == 0) {
         printf("Enter customer name: ");
-        scanf("%s",custname);
-        snprintf(custname,sizeof(custname),"%s.txt",custname);
-        WriteToFile(head,custname);
+        scanf("%s", custname);
+        snprintf(custname, sizeof(custname), "%s.txt", custname);
+        WriteToFile(head, custname);
         printf("Customer copy saved as text file. Please access it for future references.\n");
-        exit(0);
-    }
-    if (ch2 == 1){
-        printf("Restarting bill generation.......\n");
-        while (temp != NULL){
-            struct bill* gone = temp->node;
+        // Free allocated memory
+        while (head != NULL) {
+            struct bill* temp = head;
+            head = head->node;
             free(temp);
-            temp = gone;
+        }
+    }
+    else if (ch2 == 1) {
+        printf("Restarting bill generation.......\n");
+        // Free allocated memory
+        while (head != NULL) {
+            struct bill* temp = head;
+            head = head->node;
+            free(temp);
         }
         checkout();
     }
 }
+

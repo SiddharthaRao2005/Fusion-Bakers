@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "checkout.c"
+#include "checkout.h"
 
 void main()
 {
