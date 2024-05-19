@@ -12,6 +12,7 @@ struct bill {
 void WriteToFile(struct bill* head, const char* custname) {
     FILE* fp = fopen(custname, "w");
     struct bill* temp = head;
+    fprintf(fp,"item name | item quantity | item price | final price\n");
     while (temp != NULL) {
         fprintf(fp, "%s %u %u\n", temp->itemname, temp->itemquantity, (temp->itemprice * temp->itemquantity));
         temp = temp->node;
