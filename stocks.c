@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include <strings.h>
 
-
-
-void membershp()
+void stockmgmt()
 {
-    printf("Enter your name: ");
-
+    
 }

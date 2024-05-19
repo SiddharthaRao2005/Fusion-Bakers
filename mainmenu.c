@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "checkout.h"
 
-void main()
+int main()
 {
     printf("-----------------Welcome to Fusion Bakers------------------\n");
     printf("----------Please enter your choice of operation------------\n");
@@ -27,4 +27,5 @@ void main()
         printf("Choice not found.\n");
         exit(1);
     }
+    return 0;
 }
