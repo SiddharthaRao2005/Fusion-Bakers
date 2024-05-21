@@ -1,0 +1,3 @@
+item name | item quantity | item price | final price
+cake 32 1440
+book 2 30
